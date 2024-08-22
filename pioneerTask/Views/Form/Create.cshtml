@@ -1,0 +1,67 @@
+﻿@using pioneerTask.Entities.Model
+@using pioneerTask.Enums
+@model Form
+
+@{
+    ViewBag.PageTitle = "Form Management";
+    ViewBag.CardTitle = "Form Category";
+}
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Create">
+            <div class="mb-3">
+                <label asp-for="ControlName"></label>
+                <input asp-for="ControlName" class="form-control" />
+                <span asp-validation-for="ControlName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ControlType">Field Type</label>
+                <select asp-for="ControlType" class="form-control">
+                    <option value="">Select Field Type</option>
+                    @foreach (var formType in Enum.GetValues(typeof(FieldType)))
+                    {
+                        <option value="@((int)formType)">@formType</option>
+                    }
+                </select>
+                <span asp-validation-for="ControlType" class="text-danger"></span>
+            </div>
+
+
+          @*
+            <div class="col-lg-9">
+            <select id="PriceAdjustmentType" name="PriceAdjustmentType" class="form-control">
+            <option value="@((short)VarientTypeEnum.MultiSelect)">Select</option>
+            <option value="@((short)VarientTypeEnum.Text)">Text</option>
+            </select>
+            </div>
+          
+
+          <div class="mb-3">
+                <label asp-for="FormType">Field Type</label>
+                <select asp-for="FormType" id="FormType" name="FormType" class="form-control">
+                    <option value="">Select Field Type</option>
+                    @foreach (var FormType in Enum.GetValues(typeof(FieldType)))
+                    {
+                        <option value="@((int)FormType)">@FormType</option>
+                    }
+                </select>
+                <span asp-validation-for="FormType" class="text-danger"></span>
+            </div>
+ *@
+           
+
+           
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a asp-action="Index" asp-controller="Category" class="btn btn-warning">Back to Index</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
