@@ -8,7 +8,9 @@ namespace pioneerTask.Entities.Model
         public int ControlType { get; set; }
 
         [DefaultValue(true)]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } 
+        [DefaultValue(true)]
+        public bool Isrequired { get; set; }
 
         public  ICollection<UserInfo> UserInfos { get; set; }
     }

@@ -1,4 +1,7 @@
-﻿@* @model IEnumerable<Form>
+﻿@using pioneerTask.Entities.Model
+@model IEnumerable<Form>
+
+
 
 @{
     ViewBag.PageTitle = "Form Management";
@@ -7,32 +10,58 @@
 
 
 <div>
-    <a class="btn btn-success" href="Category/Create">Create</a>
-
+    <a class="btn btn-success" href="Create">Create</a>
 </div>
+
 <br />
 <table class="table table-hover" width="100%">
     <tr>
         <td>Name</td>
-        <td>isAtive</td>
+        <td>ControlType</td>
+        <td>IsActive</td>
         <td>Created</td>
         <td>Action</td>
+
+
     </tr>
-
-
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Name</td>
-            <td>@item.Description</td>
-            <td>@item.CreatedTime</td>
+            <td>@item.ControlName</td>
+            <td>@((pioneerTask.Enums.FieldType)item.ControlType)</td>
+            <td>@item.IsActive</td>
+            <td>@item.Created</td>
             <td>
                 <a class="btn btn-success" href="Category/Edit/@item.Id">Edit</a>
-                <a class="btn btn-danger" href="Category/Edit/@item.Id">Delete</a>
+
+@* 
+                <a href="javascript:;" class="btn btn-danger js-delete" data-id="@item.Id">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                </a> *@
+
+
+                <a class="btn btn-danger" href="DeleteForm/@item.Id">Delete</a>
+
 
             </td>
 
         </tr>
     }
 
-</table> *@
+</table>
+
+
+
+@section Scripts {
+
+        $(document).ready(function () {
+        $(document).on('click', '.js-delete', function () {
+            var btn = $(this);
+            console.log(btn.data('id'));
+        });
+    });
+
+
+
+}

@@ -4,7 +4,7 @@
 
 @{
     ViewBag.PageTitle = "Preview form";
-  //  ViewBag.CardTitle = "Preview form";
+    //  ViewBag.CardTitle = "Preview form";
 }
 
 <br />
@@ -18,9 +18,9 @@
                 {
                     <div class="mb-3">
                         <input type="hidden" name="@nameof(control.FormControlId)" value="@control.FormControlId" />
-                        <label >@control.FormControlName</label>
-                        <input name="@nameof(control.FormControlValue)" class="form-control" @(control.FormControlRequired? "required" : "")/>
-                        <span asp-validation-for="@control.FormControlName" class="text-danger"></span>
+                        <label>@control.FormControlName</label>
+                        <input name="@nameof(control.FormControlValue)" class="form-control" @(control.FormControlRequired ? "required" : "") />
+                        @* <span asp-validation-for="ControlName" class="text-danger"></span> *@
                     </div>
                 }
                 else if (control.FormControlType == (int)FieldType.TextArea)
@@ -28,8 +28,8 @@
                     <div class="mb-3">
                         <input type="hidden" name="@nameof(control.FormControlId)" value="@control.FormControlId" />
                         <label>@control.FormControlName</label>
-                        <textarea  name="@nameof(control.FormControlValue)" rows="4" class="form-control" @(control.FormControlRequired ? "required" : "") ></textarea>
-                        <span asp-validation-for="@control.FormControlName" class="text-danger"></span>
+                        <textarea name="@nameof(control.FormControlValue)" rows="4" class="form-control" @(control.FormControlRequired ? "required" : "")></textarea>
+                        @* <span asp-validation-for="ControlName" class="text-danger"></span> *@
                     </div>
                 }
                 else if (control.FormControlType == (int)FieldType.Number)
@@ -72,5 +72,3 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
-
-

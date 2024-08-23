@@ -4,7 +4,7 @@
 
 @{
     ViewBag.PageTitle = "Form Management";
-    ViewBag.CardTitle = "Form Category";
+    ViewBag.CardTitle = "Form Data";
 }
 <br />
 <div class="row">
@@ -28,35 +28,22 @@
                 <span asp-validation-for="ControlType" class="text-danger"></span>
             </div>
 
-
-          @*
-            <div class="col-lg-9">
-            <select id="PriceAdjustmentType" name="PriceAdjustmentType" class="form-control">
-            <option value="@((short)VarientTypeEnum.MultiSelect)">Select</option>
-            <option value="@((short)VarientTypeEnum.Text)">Text</option>
-            </select>
+            <div class="mb-3 form-check">
+                <input asp-for="IsActive" class="form-check-input" type="checkbox" />
+                <label asp-for="IsActive" class="form-check-label"></label>
+                <span asp-validation-for="IsActive" class="text-danger"></span>
             </div>
-          
-
-          <div class="mb-3">
-                <label asp-for="FormType">Field Type</label>
-                <select asp-for="FormType" id="FormType" name="FormType" class="form-control">
-                    <option value="">Select Field Type</option>
-                    @foreach (var FormType in Enum.GetValues(typeof(FieldType)))
-                    {
-                        <option value="@((int)FormType)">@FormType</option>
-                    }
-                </select>
-                <span asp-validation-for="FormType" class="text-danger"></span>
+            <div class="mb-3 form-check">
+                <input asp-for="Isrequired" class="form-check-input" type="checkbox" />
+                <label asp-for="Isrequired" class="form-check-label"></label>
+                <span asp-validation-for="Isrequired" class="text-danger"></span>
             </div>
- *@
-           
 
            
 
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Create</button>
-                <a asp-action="Index" asp-controller="Category" class="btn btn-warning">Back to Index</a>
+                <a asp-action="Index" asp-controller="Form" class="btn btn-warning">Back to Index</a>
             </div>
         </form>
     </div>

@@ -49,6 +49,35 @@ namespace pioneerTask.Controllers
 
         }
 
+        public async Task<IActionResult> DeleteForm(int? id)
+        {
+            if (id == null)
+                return BadRequest();
+
+            var form = await _dbcontext.Forms.FindAsync(id);
+
+            if (form == null)
+                return NotFound();
+
+            _dbcontext.Forms.Remove(form);
+            _dbcontext.SaveChanges();
+
+           return RedirectToAction("Index");
+        }
+
+       
+
+        public IActionResult IndexPreview()
+        {
+
+            // var categoryViewModels = _unitofwork.Category.GetAll();
+            // return View(categoryViewModels); 
+            var previewViewModels = _dbcontext.UserInfos.Include(x=>x.form);
+            return View(previewViewModels);
+        }
+     
+
+        
         public IActionResult Preview()
         {
             var model = _dbcontext.Forms.Where(f => f.IsActive)
@@ -56,7 +85,9 @@ namespace pioneerTask.Controllers
                                         {
                                             FormControlId = f.Id,
                                             FormControlName = f.ControlName,
-                                            FormControlType = f.ControlType
+                                            FormControlType = f.ControlType,
+                                            FormControlRequired=f.Isrequired,
+                                            FormControlIsActive=f.IsActive
                                         }).ToList();
 
             return View(model);
@@ -86,5 +117,8 @@ namespace pioneerTask.Controllers
             return Redirect("/form");
         }
 
-        }
+
+        
+
+    }
 }

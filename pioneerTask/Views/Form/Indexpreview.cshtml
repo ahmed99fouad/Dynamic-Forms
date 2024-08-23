@@ -1,0 +1,93 @@
+﻿@using pioneerTask.Entities.Model
+@model IEnumerable<UserInfo>
+
+
+
+@{
+    ViewBag.PageTitle = "UserInfo Management";
+    ViewBag.CardTitle = "View UserInfo";
+}
+
+
+<div>
+    <a class="btn btn-success" href="Preview">Create</a>
+</div>
+
+<br />
+<table class="table table-hover" width="100%">
+    <tr>
+        <td>Name</td>
+        <td>Type</td>
+        <td>Created</td>
+        <td>Action</td>
+
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ControlValue</td>
+            <td>@item.form.ControlName</td>
+            <td>@item.Created</td>
+            <td>
+                <a class="btn btn-success" href="Category/Edit/@item.Id">Edit</a>
+                <a href="javascript:;" class="btn btn-danger js-delete" data-id="@item.Id">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                </a>
+@*                 <a class="btn btn-danger" href="Category/Edit/@item.Id">Delete</a>
+ *@
+
+          
+
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.js-delete').on('click', function () {
+                var btn = $(this);
+
+                bootbox.confirm({
+                    message: "Are  you sure that you need to delete this movie?",
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-danger'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-outline-secondary'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: '/MoviesController1/delete/' + btn.data('id'),
+                                success: function () {
+                                    var movieContainer = btn.parents('.col-12');
+                                    movieContainer.addClass('animate__animated animate__zoomOut');
+
+                                    setTimeout(function () {
+                                        movieContainer.remove();
+                                    }, 1000);
+
+                                    toastr.success('Movies deleted');
+                                },
+                                error: function () {
+                                    toastr.error('Something went wrong!');
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}
